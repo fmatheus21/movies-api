@@ -1,0 +1,50 @@
+spring:
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true
+  jpa:
+    show-sql: ${JPA_SHOW_SQL:true}
+    properties:
+      hibernate:
+        format_sql: ${JPA_FORMAT_SQL:false}
+        dialect: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      use-new-id-generator-mappings: false
+    database: ${SPRING_JPA_DATABASE:MYSQL}
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+
+server:
+  port: ${SERVER_PORT:8083}
+  servlet:
+    context-path: ${CONTEXT_PATH:/api/v1}
+    encoding:
+      charset: UTF-8
+
+file:
+  upload-dir: ${FILE_UPLOAD_DIR:/Projects/Movies/movies-api/upload/media}
+
+security:
+  oauth2:
+    refresh-token-validity-seconds: ${REFRESH_TOKEN_VALIDITY_SECONDS:86400}
+    token-validity-seconds: ${TOKEN_VALIDITY_SECONDS:43200}
+    context-path-token: ${CONTEXT_PATH_TOKEN:/oauth/token}
+    secure-https: ${SECURE_HTTPS:false}
+    jwt-signing-key: ${JWT_SIGNING_KEY:angular123456@}
+    secret-client: ${CONFIG_SECRET_CLIENT:angular123456@}
+    with-client: ${CONFIG_WITH_CLIENT:angular}
+  resource:
+    domain: ${DOMAIN:http://localhost:8083}
+    allow-origin: ${ALLOW_ORIGIN:http://localhost:4200}
+
+openapi:
+  application:
+    swagger-ui-path: ${OPENAPI_API_SWAGGER_PATH:/api/v1/swagger-ui.html}
+    api-docs-path: ${OPENAPI_API_DOCS_PATH:/api/v1/v3/api-docs}
+    title: ${OPENAPI_TITLE:Cadastro de Filmes}
+    version: ${OPENAPI_VERSION:1.0.0}
+    description: ${OPENAPI_DESCRIPTION:Sistema de Cadastro de Filmes}
