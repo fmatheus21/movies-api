@@ -12,25 +12,13 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
-/**
- * Classe que contem metodo responsavel por retornar mensagens.
- *
- * @author Fernando Matheus
- */
+
 @Component
 public class MessageResponseRule {
 
     @Autowired
     private MessageSource messageSource;
 
-    /**
-     * Metodo responsavel por retornar uma MessageResponse de acordo com o status da
-     * resposta.
-     *
-     * @param messagesEnum - MessagesEnum
-     * @return MessageResponse
-     * @author Fernando Matheus
-     */
     private MessageResponse messageResponse(MessagesEnum messagesEnum) {
         String message = messageSource.getMessage(messagesEnum.getMessage(), null, LocaleContextHolder.getLocale());
         return new MessageResponse(messagesEnum.getHttpCode(), messagesEnum.getHttpDesctription(), messagesEnum.getHttpCause(), message);
@@ -54,6 +42,10 @@ public class MessageResponseRule {
 
     public BadRequestException errorNotFound() {
         return new BadRequestException(MessagesEnum.ERROR_NOT_FOUND.getMessage());
+    }
+
+    public BadRequestException badRequestErrorUserNotfound() {
+        return new BadRequestException(MessagesEnum.ERROR_USER_NOTFOUND.getMessage());
     }
 
     public UsernameNotFoundException usernameNotFoundException() {
@@ -80,7 +72,9 @@ public class MessageResponseRule {
         return new UserInactiveException(MessagesEnum.ERROR_USER_INACTIVE.getMessage());
     }
 
-
+    public BadRequestException badRequestErrorFileMaxLength() {
+        return new BadRequestException(MessagesEnum.ERROR_NOT_FOUND_FILE.getMessage());
+    }
 
 
 }
