@@ -5,7 +5,6 @@ import lombok.Getter;
 
 public enum UploadTypeEnum {
 
-    AVATAR("avatar"),
     MOVIE("movie");
 
     @Getter

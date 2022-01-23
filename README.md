@@ -40,13 +40,13 @@ Conteúdos
 # Features
 
 ## Back-end
-- [ ] Access Token
-- [ ] Refresh Token
-- [ ] Logout
-- [ ] Cadastrar Filme
-- [ ] Consultar Filme
+- [x] Access Token
+- [x] Refresh Token
+- [x] Logout
+- [x] Cadastrar Filme
+- [x] Consultar Filme
 - [ ] Atualizar Filme
-- [ ] Listar Filme
+- [x] Listar Filme
 - [ ] Excluir Filme
 
 ## Front-end
@@ -126,12 +126,12 @@ Conteúdos
 # Tecnologias 
 <div>
 <img src="https://img.shields.io/static/v1?label=Java&message=12&color=green"/>
-<img src="https://img.shields.io/static/v1?label=spring-boot&message=2.4.1&color=green"/>
+<img src="https://img.shields.io/static/v1?label=spring-boot&message=2.5.8&color=green"/>
 <img src="https://img.shields.io/static/v1?label=oauth&message=2.2.6&color=green"/>
 <img src="https://img.shields.io/static/v1?label=jwt&message=1.1.0&color=green"/>
 <img src="https://img.shields.io/static/v1?label=mysql&message=8&color=green"/>
-<img src="https://img.shields.io/static/v1?label=swagger&message=2.6.0&color=green"/>
-<img src="https://img.shields.io/static/v1?label=angular&message=9&color=green"/>
+<img src="https://img.shields.io/static/v1?label=openapi&message=1.6.3&color=green"/>
+<img src="https://img.shields.io/static/v1?label=angular&message=10&color=green"/>
   
 <img src="https://img.shields.io/static/v1?label=angular-jwt&message=4.0.3&color=green"/>
 <img src="https://img.shields.io/static/v1?label=ng2-toasty&message=4.0.3&color=green"/>
@@ -142,5 +142,4 @@ Conteúdos
 <img src="https://img.shields.io/static/v1?label=metronic&message=7.0.8&color=green"/>
  
 </div>
-
 

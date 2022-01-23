@@ -15,11 +15,6 @@ public class MethodGlobalUtil {
 
     public static FileResponse uploadFileConfig(UploadTypeEnum type) {
         return switch (type) {
-            case AVATAR -> FileResponse.builder()
-                    .path(AppPropertiesEnum.AVATAR_PATH.getValue())
-                    .width(Integer.parseInt(AppPropertiesEnum.AVATAR_SIZE_WIDTH.getValue()))
-                    .height(Integer.parseInt(AppPropertiesEnum.AVATAR_SIZE_HEIGHT.getValue()))
-                    .build();
             case MOVIE -> FileResponse.builder()
                     .path(AppPropertiesEnum.MOVIE_PATH.getValue())
                     .width(Integer.parseInt(AppPropertiesEnum.MOVIE_SIZE_WIDTH.getValue()))
