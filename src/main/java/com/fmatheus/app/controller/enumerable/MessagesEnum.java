@@ -21,7 +21,8 @@ public enum MessagesEnum {
     ERROR_NOT_FOUND(400, "Bad Request", "BAD REQUEST", "message.error.not-found"),
     ERROR_NOT_READABLE(400, "Bad Request", "BAD REQUEST", "message.error.not-readable"),
     ERROR_USER_NOTFOUND(400, "Bad Request", "BAD REQUEST", "message.error.user-notfound"),
-    ERROR_USER_INACTIVE(400, "Bad Request", "BAD REQUEST", "message.error.user-inactive");
+    ERROR_USER_INACTIVE(400, "Bad Request", "BAD REQUEST", "message.error.user-inactive"),
+    ERROR_NOT_FOUND_FILE(400, "Bad Request", "BAD REQUEST", "message.error.not-found-file");
 
     @Getter
     private final int httpCode;
