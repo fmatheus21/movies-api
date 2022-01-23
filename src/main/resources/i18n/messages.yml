@@ -1,5 +1,6 @@
 message:
   error:
+    not-found-file: O arquivo é obrigatório.
     user-inactive: Usuário inativo. Contacte o administrador.
     user-notfound: Usuário não encontrado.
     file-storage: O nome do arquivo contém uma sequência de caminho inválida
