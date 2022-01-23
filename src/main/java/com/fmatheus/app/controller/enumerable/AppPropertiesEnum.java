@@ -9,13 +9,9 @@ public enum AppPropertiesEnum {
     FILE("file:".concat(File.separator)),
     IMAGE_EXTENSION("png"),
     SYSTEM_PATH("/system"),
-    AVATAR_SYSTEM_PATH("/system/avatar"),
-    AVATAR_PATH("/avatar"),
-    AVATAR_SIZE_WIDTH("300"),
-    AVATAR_SIZE_HEIGHT("300"),
     MOVIE_PATH("/movie"),
-    MOVIE_SIZE_WIDTH("700"),
-    MOVIE_SIZE_HEIGHT("700");
+    MOVIE_SIZE_WIDTH("400"),
+    MOVIE_SIZE_HEIGHT("600");
 
     @Getter
     private final String value;
