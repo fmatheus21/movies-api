@@ -13,5 +13,8 @@ public class FileResponse {
     private int width;
     private int height;
     private String path;
+    private String extension;
+    private String fileName;
+    private String outputQuality;
 
 }
