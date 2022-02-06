@@ -23,5 +23,10 @@ public class ValuePropertiesConstant {
     public static final String OPENAPI_API_DOCS_PATH = "${openapi.application.api-docs-path}";
     public static final String OPENAPI_API_SWAGGER_PATH = "${openapi.application.swagger-ui-path}";
     public static final String CLASSPATH_LOGO = "${classpath.logo}";
+    public static final String UPLOAD_FILE_MOVIE = "${upload.file.movie.dir}";
+    public static final String UPLOAD_MOVIE_SIZE_WIDTH = "${upload.file.movie.size.width}";
+    public static final String UPLOAD_MOVIE_SIZE_HEIGHT = "${upload.file.movie.size.height}";
+    public static final String UPLOAD_MOVIE_QUALITY = "${upload.file.movie.quality}";
+    public static final String UPLOAD_MOVIE_EXTENSION = "${upload.file.movie.extension}";
 
 }
