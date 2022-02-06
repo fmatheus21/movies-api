@@ -3,6 +3,7 @@ package com.fmatheus.app.model.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Collection;
 
@@ -16,7 +17,9 @@ import java.util.Collection;
 @Table(name = "role", catalog = "movies")
 public class Role implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -26,7 +29,7 @@ public class Role implements Serializable {
     private String method;
 
     @Column(name = "role", nullable = false, length = 100)
-    private String role;
+    private String roleUser;
 
     @Column(name = "name", nullable = false, length = 100)
     private String name;
