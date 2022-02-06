@@ -1,5 +1,7 @@
 package com.fmatheus.app.controller.exception;
 
+import com.fmatheus.app.controller.enumerable.MessagesEnum;
+
 /**
  * Ao lancar esta excecao, a mesma sera capturada pela classe AppExceptionHandler onde sera tratada.
  *
@@ -7,11 +9,12 @@ package com.fmatheus.app.controller.exception;
  */
 public class FileStorageException extends RuntimeException {
 
-    public FileStorageException(String message) {
-        super(message);
-    }
+        public FileStorageException(MessagesEnum messagesEnum) {
+            super(messagesEnum.getMessage());
+        }
 
-    public FileStorageException(String message, Throwable cause) {
-        super(message, cause);
-    }
+        public FileStorageException(MessagesEnum messagesEnum, Throwable cause) {
+            super(messagesEnum.getMessage(), cause);
+        }
+
 }
