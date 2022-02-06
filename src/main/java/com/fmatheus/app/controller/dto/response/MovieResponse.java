@@ -1,41 +1,39 @@
 package com.fmatheus.app.controller.dto.response;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fmatheus.app.controller.dto.MovieDto;
 import com.fmatheus.app.controller.hateoas.link.MovieLink;
+import com.fmatheus.app.controller.storage.FilesStorageService;
+import com.fmatheus.app.controller.util.MethodGlobalUtil;
 import com.fmatheus.app.model.entity.Movie;
 import lombok.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.RepresentationModel;
-import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-@Component
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@JsonPropertyOrder({"_links", "movie"})
 public class MovieResponse extends RepresentationModel<MovieResponse> {
 
-    @JsonProperty("movie")
-    @Autowired
-    private MovieDto movieDto;
+    private MovieDto movie;
 
-    public MovieResponse converterForResponse(Movie movie) {
+    public static MovieResponse converterForResponse(Movie movie, MethodGlobalUtil methodGlobalUtil, FilesStorageService filesStorageService) {
         return hateoas(MovieResponse.builder()
-                .movieDto(this.movieDto.converterToDto(movie))
+                .movie(MovieDto.converterToDto(movie, methodGlobalUtil, filesStorageService))
                 .build());
     }
 
-    public Collection<MovieResponse> converterListForResponse(Collection<Movie> collection) {
-        return collection.stream().map(this::converterForResponse).collect(Collectors.toUnmodifiableList());
+    public static Collection<MovieResponse> converterListForResponse(Collection<Movie> collection, MethodGlobalUtil methodGlobalUtil, FilesStorageService filesStorageService) {
+        return collection.stream().map(map -> converterForResponse(map, methodGlobalUtil, filesStorageService)).collect(Collectors.toUnmodifiableList());
     }
 
-    private MovieResponse hateoas(MovieResponse dto) {
-        return new MovieLink().hateoas(dto, dto.getMovieDto().getId());
+    private static MovieResponse hateoas(MovieResponse dto) {
+        return new MovieLink().hateoas(dto, dto.getMovie().getId());
     }
 
 
