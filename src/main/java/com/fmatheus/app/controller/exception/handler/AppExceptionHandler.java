@@ -68,15 +68,23 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
         this.message = messageSource.getMessage(ex.getMessage(), null, LocaleContextHolder.getLocale());
         this.cause = ExceptionUtils.getRootCauseMessage(ex);
         List<MessageResponse> erros = this.errosMessageResponse(MessagesEnum.ERROR_NOT_PERMISSION, this.cause, this.message);
-        return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.FORBIDDEN, request);
+        return handleExceptionInternal(ex, erros, new HttpHeaders(), MessagesEnum.ERROR_NOT_PERMISSION.getHttpSttus(), request);
     }
 
     @ExceptionHandler({FileStorageException.class})
     public ResponseEntity<Object> handleFileStorageException(RuntimeException ex, WebRequest webRequest) {
         this.message = messageSource.getMessage(ex.getMessage(), null, LocaleContextHolder.getLocale());
         this.cause = ExceptionUtils.getRootCauseMessage(ex);
-        List<MessageResponse> erros = this.errosMessageResponse(MessagesEnum.ERROR_BAD_REQUEST, this.cause, this.message);
-        return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.BAD_REQUEST, webRequest);
+        List<MessageResponse> erros = this.errosMessageResponse(MessagesEnum.ERROR_FILE_STORAGE, this.cause, this.message);
+        return handleExceptionInternal(ex, erros, new HttpHeaders(), MessagesEnum.ERROR_FILE_STORAGE.getHttpSttus(), webRequest);
+    }
+
+    @ExceptionHandler({CouldNotReadException.class})
+    public ResponseEntity<Object> handleCouldNotReadException(RuntimeException ex, WebRequest webRequest) {
+        this.message = messageSource.getMessage(ex.getMessage(), null, LocaleContextHolder.getLocale());
+        this.cause = ExceptionUtils.getRootCauseMessage(ex);
+        List<MessageResponse> erros = this.errosMessageResponse(MessagesEnum.ERROR_COULD_NOT_READ, this.cause, this.message);
+        return handleExceptionInternal(ex, erros, new HttpHeaders(), MessagesEnum.ERROR_COULD_NOT_READ.getHttpSttus(), webRequest);
     }
 
     @ExceptionHandler(ResponseStatusException.class)
@@ -123,8 +131,7 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
 
     private List<MessageResponse> errosMessageResponse(MessagesEnum messagesEnum, String cause, String message) {
         return Collections.singletonList(new MessageResponse(
-                messagesEnum.getHttpSttus().value(),
-                messagesEnum.getHttpSttus().name(),
+                messagesEnum,
                 cause,
                 message
         ));
