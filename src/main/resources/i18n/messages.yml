@@ -1,15 +1,18 @@
 message:
   error:
+    could-not-read: Não foi possível ler o arquivo. Contcte o administrador.
+    code-imdb-exist: O código IMDB já existe.
     not-found-file: O arquivo é obrigatório.
     user-inactive: Usuário inativo. Contacte o administrador.
     user-notfound: Usuário não encontrado.
-    file-storage: O nome do arquivo contém uma sequência de caminho inválida
+    file-storage: Não foi possível salvar o arquivo. Entre em contato com o administrador.
     internal-server: Houve um erro inesperado. Tente novamente. Caso o problema persista, entre em contato com o administrador.
     forbidden: Acesso negado!
     bad-request: Registro não encontrado.
     not-permission: Você não tem permissão para realizar esta ação.
     not-found: Registro não encontrado.
     not-readable: Existem campos não reconhecidos.
+    unauthorized: Não autorizado.
   success:
     delete: Registro excluído com sucesso.
     update: Registro atualizado com sucesso.
