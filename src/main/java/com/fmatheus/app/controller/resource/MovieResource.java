@@ -19,7 +19,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.Collection;
 
@@ -86,8 +85,8 @@ public class MovieResource {
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ServerError.class)))
     })
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    public ResponseEntity<MessageResponse> create(Authentication auth, @RequestBody @Valid @RequestParam(name = "json") String json, @RequestParam(name = "file") MultipartFile file, HttpServletResponse response) {
-        return rule.create(auth, json, file, response);
+    public ResponseEntity<MessageResponse> create(Authentication auth, @RequestBody @Valid @RequestParam(name = "json") String json, @RequestParam(name = "file") MultipartFile file) {
+        return rule.create(auth, json, file);
     }
 
 }
