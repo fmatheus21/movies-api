@@ -35,10 +35,7 @@ public class MovieRule {
     private MovieService movieService;
 
     @Autowired
-    private MovieResponse movieResponse;
-
-    @Autowired
-    private FilesStorageService storageService;
+    private FilesStorageService filesStorageService;
 
     @Autowired
     private MethodGlobalUtil methodGlobalUtil;
@@ -46,14 +43,14 @@ public class MovieRule {
 
     public ResponseEntity<Collection<MovieResponse>> findAll() {
         var movies = this.movieService.findAllSortAsc(EntityEnum.TITLE.getValue());
-        return Objects.nonNull(movies) ? ResponseEntity.ok(this.movieResponse.converterListForResponse(movies)) : ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        return Objects.nonNull(movies) ? ResponseEntity.ok(MovieResponse.converterListForResponse(movies, methodGlobalUtil, filesStorageService)) : ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     public ResponseEntity<MovieResponse> findById(int id) {
         var movie = this.movieService.findById(id).orElseThrow(
                 () -> this.messageResponseRule.errorNotFound()
         );
-        return ResponseEntity.status(HttpStatus.OK).body(movieResponse.converterForResponse(movie));
+        return ResponseEntity.status(HttpStatus.OK).body(MovieResponse.converterForResponse(movie, methodGlobalUtil, filesStorageService));
     }
 
 
@@ -85,7 +82,7 @@ public class MovieRule {
 
     private String saveFile(MultipartFile file) {
         var fileResponse = this.methodGlobalUtil.uploadFileConfig(UploadTypeEnum.MOVIE, null);
-        return this.storageService.save(file, fileResponse);
+        return this.filesStorageService.save(file, fileResponse);
     }
 
 
