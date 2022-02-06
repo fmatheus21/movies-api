@@ -3,6 +3,7 @@ package com.fmatheus.app.model.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serial;
 import java.io.Serializable;
 
 
@@ -17,6 +18,7 @@ import java.io.Serializable;
 
 public class Contact implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id

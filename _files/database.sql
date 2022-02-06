@@ -1,10 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `movies` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `movies`;
--- MySQL dump 10.13  Distrib 8.0.25, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.28, for Linux (x86_64)
 --
 -- Host: localhost    Database: movies
 -- ------------------------------------------------------
--- Server version	8.0.25
+-- Server version	8.0.28-0ubuntu0.20.04.3
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -61,7 +59,7 @@ CREATE TABLE `error_system` (
   `message` longtext NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,6 +68,7 @@ CREATE TABLE `error_system` (
 
 LOCK TABLES `error_system` WRITE;
 /*!40000 ALTER TABLE `error_system` DISABLE KEYS */;
+INSERT INTO `error_system` VALUES (1,'2022-02-05 23:53:42','com.fmatheus.app.controller.storage.test.FilesStorageServiceImpl','save','upload/media/movies/1644105221948.png'),(2,'2022-02-06 00:09:54','com.fmatheus.app.controller.storage.test.FilesStorageServiceImpl','save','MultipartFile resource [file] cannot be resolved to absolute file path'),(3,'2022-02-06 00:11:11','com.fmatheus.app.controller.storage.test.FilesStorageServiceImpl','save','MultipartFile resource [file] cannot be resolved to absolute file path'),(4,'2022-02-06 01:39:52','com.fmatheus.app.controller.storage.FilesStorageServiceImpl','save','Cannot invoke \"String.isEmpty()\" because \"str\" is null'),(5,'2022-02-06 01:40:39','com.fmatheus.app.controller.storage.FilesStorageServiceImpl','save','Cannot invoke \"String.isEmpty()\" because \"str\" is null'),(6,'2022-02-06 01:42:27','com.fmatheus.app.controller.storage.FilesStorageServiceImpl','save','Cannot invoke \"String.isEmpty()\" because \"str\" is null'),(7,'2022-02-06 01:42:54','com.fmatheus.app.controller.storage.FilesStorageServiceImpl','save','Cannot invoke \"String.isEmpty()\" because \"str\" is null'),(8,'2022-02-06 01:54:19','com.fmatheus.app.controller.storage.FilesStorageServiceImpl','save','Specified format is not supported: .png');
 /*!40000 ALTER TABLE `error_system` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -82,6 +81,7 @@ DROP TABLE IF EXISTS `movie`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `movie` (
   `id` int NOT NULL AUTO_INCREMENT,
+  `code_imdb` varchar(15) NOT NULL,
   `title` varchar(255) NOT NULL,
   `year` int NOT NULL,
   `rating` decimal(2,1) NOT NULL,
@@ -95,11 +95,12 @@ CREATE TABLE `movie` (
   UNIQUE KEY `id_UNIQUE` (`id`),
   UNIQUE KEY `title_UNIQUE` (`title`),
   UNIQUE KEY `image_UNIQUE` (`image`),
+  UNIQUE KEY `code_imdb_UNIQUE` (`code_imdb`),
   KEY `fk_created_idx` (`created_by`),
   KEY `fk_updated_idx` (`updated_by`),
   CONSTRAINT `fk_created` FOREIGN KEY (`created_by`) REFERENCES `user` (`id`) ON DELETE RESTRICT,
   CONSTRAINT `fk_updated` FOREIGN KEY (`updated_by`) REFERENCES `user` (`id`) ON DELETE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -108,6 +109,7 @@ CREATE TABLE `movie` (
 
 LOCK TABLES `movie` WRITE;
 /*!40000 ALTER TABLE `movie` DISABLE KEYS */;
+INSERT INTO `movie` VALUES (25,'3402236','Assassinato No Expresso Do Oriente',2017,6.5,'https://www.youtube.com/watch?v=1LqXLJEq4sw','1644117911140.png',1,'2022-02-06 03:25:11',1,'2022-02-06 03:25:11'),(26,'11083552','Infiltrado',2021,7.1,'https://www.youtube.com/watch?v=U6lq_G4VR60','1644118109073.png',1,'2022-02-06 03:28:29',1,'2022-02-06 03:28:29'),(27,'7888964','Anônimo',2021,7.4,'https://www.youtube.com/watch?v=Fn1MT681zeE','1644118456183.png',1,'2022-02-06 03:34:17',1,'2022-02-06 03:34:17');
 /*!40000 ALTER TABLE `movie` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -192,7 +194,7 @@ CREATE TABLE `role` (
 
 LOCK TABLES `role` WRITE;
 /*!40000 ALTER TABLE `role` DISABLE KEYS */;
-INSERT INTO `role` VALUES (1,'GET','LIST_MOVIE','LISTAR FILMES'),(2,'GET','VIEW_MOVIE','VISUALIZAR FILME'),(3,'POST','CREATE_MOVIE','CRIAR FILME'),(4,'PUT','UPDATE_MOVIE','ATUALIZAR FILME'),(5,'DELETE','DELETE_MOVIE','EXCLUIR FILME');
+INSERT INTO `role` VALUES (1,'GET','LIST_MOVIES','LISTAR FILMES'),(2,'GET','VIEW_MOVIES','VISUALIZAR FILME'),(3,'POST','CREATE_MOVIES','CRIAR FILME'),(4,'PUT','UPDATE_MOVIES','ATUALIZAR FILME'),(5,'DELETE','DELETE_MOVIES','EXCLUIR FILME');
 /*!40000 ALTER TABLE `role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -295,4 +297,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-01-20  0:31:30
+-- Dump completed on 2022-02-06  0:49:07

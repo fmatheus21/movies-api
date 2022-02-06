@@ -3,6 +3,7 @@ package com.fmatheus.app.model.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -17,12 +18,16 @@ import java.time.LocalDateTime;
 @Table(name = "movie", catalog = "movies")
 public class Movie implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
+
+    @Column(name = "code_imdb", nullable = false, length = 15)
+    private String codeImdb;
 
     @Column(name = "title", nullable = false)
     private String title;

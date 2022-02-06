@@ -46,7 +46,7 @@ public class AppUserDetailsService implements UserDetailsService {
 
     private Collection<? extends GrantedAuthority> authorities(User user) {
         Set<SimpleGrantedAuthority> authoritys = new HashSet<>();
-        user.getRoleCollection().forEach(p -> authoritys.add(new SimpleGrantedAuthority(p.getRole().toUpperCase())));
+        user.getRoleCollection().forEach(p -> authoritys.add(new SimpleGrantedAuthority(p.getRoleUser().toUpperCase())));
         return authoritys;
     }
 

@@ -18,34 +18,36 @@ import java.math.BigDecimal;
 public class MovieRequest {
 
     @NotNull
+    private String codeImdb;
+
+    @NotNull
     @NotBlank
     private String title;
+
     @NotNull
     private int year;
+
     @NotNull
     private BigDecimal rating;
+
     @NotNull
     @NotBlank
     private String urlTrailer;
 
     @SneakyThrows
-    public static Movie converterEntity(String json, String image, User user) {
-
-        var objectMapper = new ObjectMapper();
-        var request = objectMapper.readValue(json, MovieRequest.class);
-
+    public static Movie converterEntity(MovieRequest request, String image, User user) {
         return Movie.builder()
+                .codeImdb(request.getCodeImdb())
                 .title(AppUtil.convertFirstUppercaseCharacter(request.getTitle()))
                 .year(request.getYear())
                 .rating(request.getRating())
-                .urlTrailer(request.urlTrailer)
+                .urlTrailer(request.getUrlTrailer())
                 .createdBy(user)
                 .createdAt(LocalDatetUtil.currentDateTime())
                 .updatedBy(user)
                 .updatedAt(LocalDatetUtil.currentDateTime())
                 .image(image)
                 .build();
-
     }
 
 }

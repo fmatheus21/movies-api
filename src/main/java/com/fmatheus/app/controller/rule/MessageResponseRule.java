@@ -1,10 +1,7 @@
 package com.fmatheus.app.controller.rule;
 
 import com.fmatheus.app.controller.enumerable.MessagesEnum;
-import com.fmatheus.app.controller.exception.BadRequestException;
-import com.fmatheus.app.controller.exception.FileStorageException;
-import com.fmatheus.app.controller.exception.ForbiddenException;
-import com.fmatheus.app.controller.exception.UserInactiveException;
+import com.fmatheus.app.controller.exception.*;
 import com.fmatheus.app.controller.exception.handler.response.MessageResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -21,7 +18,7 @@ public class MessageResponseRule {
 
     private MessageResponse messageResponse(MessagesEnum messagesEnum) {
         String message = messageSource.getMessage(messagesEnum.getMessage(), null, LocaleContextHolder.getLocale());
-        return new MessageResponse(messagesEnum.getHttpCode(), messagesEnum.getHttpDesctription(), messagesEnum.getHttpCause(), message);
+        return new MessageResponse(messagesEnum, messagesEnum.getHttpSttus().getReasonPhrase(), message);
     }
 
     public MessageResponse messageSuccessUpdate() {
@@ -36,16 +33,16 @@ public class MessageResponseRule {
         return messageResponse(MessagesEnum.SUCCESS_DELETE);
     }
 
-    public BadRequestException errorBadRequest() {
-        return new BadRequestException(MessagesEnum.ERROR_BAD_REQUEST.getMessage());
+    public BadRequestException errorBadRequest(MessagesEnum messagesEnum) {
+        return new BadRequestException(messagesEnum);
     }
 
     public BadRequestException errorNotFound() {
-        return new BadRequestException(MessagesEnum.ERROR_NOT_FOUND.getMessage());
+        return new BadRequestException(MessagesEnum.ERROR_NOT_FOUND);
     }
 
     public BadRequestException badRequestErrorUserNotfound() {
-        return new BadRequestException(MessagesEnum.ERROR_USER_NOTFOUND.getMessage());
+        return new BadRequestException(MessagesEnum.ERROR_USER_NOTFOUND);
     }
 
     public UsernameNotFoundException usernameNotFoundException() {
@@ -65,7 +62,7 @@ public class MessageResponseRule {
     }
 
     public FileStorageException fileStorageException() {
-        return new FileStorageException(MessagesEnum.ERROR_FILE_STORAGE.getMessage());
+        return new FileStorageException(MessagesEnum.ERROR_FILE_STORAGE);
     }
 
     public UserInactiveException userInactiveException() {
@@ -73,8 +70,15 @@ public class MessageResponseRule {
     }
 
     public BadRequestException badRequestErrorFileMaxLength() {
-        return new BadRequestException(MessagesEnum.ERROR_NOT_FOUND_FILE.getMessage());
+        return new BadRequestException(MessagesEnum.ERROR_NOT_FOUND_FILE);
     }
+
+
+    public CouldNotReadException couldNotReadException() {
+        return new CouldNotReadException(MessagesEnum.ERROR_COULD_NOT_READ);
+    }
+
+
 
 
 }

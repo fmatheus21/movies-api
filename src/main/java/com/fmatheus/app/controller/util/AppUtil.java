@@ -5,10 +5,13 @@ import br.com.caelum.stella.format.CNPJFormatter;
 import br.com.caelum.stella.format.CPFFormatter;
 import br.com.caelum.stella.validation.CNPJValidator;
 import br.com.caelum.stella.validation.CPFValidator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.io.File;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -18,7 +21,11 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static java.text.NumberFormat.getCurrencyInstance;
+
 public class AppUtil {
+
+    private static final Logger logger = LoggerFactory.getLogger(AppUtil.class);
 
     private AppUtil() {
         throw new IllegalStateException("Utility class");
@@ -153,13 +160,18 @@ public class AppUtil {
 
 
     public static String formatMoney(BigDecimal value) {
-        DecimalFormat decimalFormat = (DecimalFormat) DecimalFormat.getCurrencyInstance();
+        DecimalFormat decimalFormat = (DecimalFormat) getCurrencyInstance();
         DecimalFormatSymbols decimalFormatSymbols = new DecimalFormatSymbols();
         decimalFormatSymbols.setCurrencySymbol("R$");
         decimalFormatSymbols.setMonetaryDecimalSeparator(',');
         decimalFormatSymbols.setGroupingSeparator('.');
         decimalFormat.setDecimalFormatSymbols(decimalFormatSymbols);
         return decimalFormat.format(value);
+    }
+
+    public static boolean checkDirectoryExists(String directory) {
+        logger.info("Verificando se o diretorio existe: {}", directory);
+        return Objects.nonNull(directory) && new File(directory).exists();
     }
 
 }

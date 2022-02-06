@@ -35,7 +35,7 @@ public class Base64Deserializer extends JsonDeserializer<Object> implements Cont
 
             throw new InvalidFormatException(
                     parser,
-                    String.format("Value for '%s' is not a base64 encoded JSON", fieldName),
+                    String.format("O valor para '%s' não é um JSON codificado em base64", fieldName),
                     value,
                     wrapperClass
             );

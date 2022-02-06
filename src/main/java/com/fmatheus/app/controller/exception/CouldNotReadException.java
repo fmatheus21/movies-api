@@ -7,13 +7,13 @@ import com.fmatheus.app.controller.enumerable.MessagesEnum;
  *
  * @author Fernando Matheus
  */
-public class FileStorageException extends RuntimeException {
+public class CouldNotReadException extends RuntimeException {
 
-        public FileStorageException(MessagesEnum messagesEnum) {
+        public CouldNotReadException(MessagesEnum messagesEnum) {
             super(messagesEnum.getMessage());
         }
 
-        public FileStorageException(MessagesEnum messagesEnum, Throwable cause) {
+        public CouldNotReadException(MessagesEnum messagesEnum, Throwable cause) {
             super(messagesEnum.getMessage(), cause);
         }
 

@@ -3,6 +3,7 @@ package com.fmatheus.app.model.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Collection;
 
@@ -16,6 +17,7 @@ import java.util.Collection;
 @Table(name = "user_status", catalog = "movies")
 public class UserStatus implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id

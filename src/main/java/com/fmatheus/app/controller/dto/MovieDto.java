@@ -3,7 +3,7 @@ package com.fmatheus.app.controller.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fmatheus.app.controller.enumerable.UploadTypeEnum;
-import com.fmatheus.app.controller.storage.FileServiceStorage;
+import com.fmatheus.app.controller.storage.FilesStorageService;
 import com.fmatheus.app.controller.util.AppUtil;
 import com.fmatheus.app.controller.util.MethodGlobalUtil;
 import com.fmatheus.app.model.entity.Movie;
@@ -11,7 +11,6 @@ import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.io.File;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -39,7 +38,11 @@ public class MovieDto {
 
     @Autowired
     @JsonInclude(JsonInclude.Include.NON_DEFAULT)
-    private FileServiceStorage fileServiceStorage;
+    private FilesStorageService filesStorageService;
+
+    @JsonInclude(JsonInclude.Include.NON_DEFAULT)
+    @Autowired
+    private MethodGlobalUtil methodGlobalUtil;
 
 
     public MovieDto converterToDto(Movie movie) {
@@ -49,7 +52,7 @@ public class MovieDto {
                 .year(movie.getYear())
                 .rating(movie.getRating())
                 .urlTrailer(movie.getUrlTrailer())
-                .image(MethodGlobalUtil.converterImageToBase64(loadIcon(movie)))
+                .image(this.methodGlobalUtil.converterImageToBase64(loadIcon(movie)))
                 .createdBy(AppUtil.convertFirstUppercaseCharacter(movie.getCreatedBy().getPerson().getName()))
                 .createdAt(movie.getCreatedAt())
                 .updatedBy(AppUtil.convertFirstUppercaseCharacter(AppUtil.convertFirstUppercaseCharacter(movie.getUpdatedBy().getPerson().getName())))
@@ -57,8 +60,9 @@ public class MovieDto {
                 .build();
     }
 
+    @SneakyThrows
     private String loadIcon(Movie movie) {
-        return fileServiceStorage.returnPath(MethodGlobalUtil.uploadFileConfig(UploadTypeEnum.MOVIE)).concat(File.separator).concat(movie.getImage());
+        return this.filesStorageService.load(this.methodGlobalUtil.uploadFileConfig(UploadTypeEnum.MOVIE, movie.getImage())).getFile().getAbsolutePath();
     }
 
 

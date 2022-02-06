@@ -13,7 +13,7 @@ public class CapitalizeUtil {
     }
 
     public static String capitalizeFully(final String str) {
-        return capitalizeFully(str, null);
+        return capitalizeFully(str, (char[]) null);
     }
 
     public static String capitalizeFully(String str, final char... delimiters) {

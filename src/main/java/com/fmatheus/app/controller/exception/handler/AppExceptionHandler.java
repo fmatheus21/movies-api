@@ -45,58 +45,46 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         this.message = messageSource.getMessage(MessagesEnum.ERROR_NOT_READABLE.getMessage(), null, LocaleContextHolder.getLocale());
         this.cause = ex.getCause().toString();
-        List<MessageResponse> erros = Collections.singletonList(new MessageResponse(
-                MessagesEnum.ERROR_NOT_READABLE.getHttpCode(),
-                MessagesEnum.ERROR_NOT_READABLE.getHttpDesctription(),
-                this.cause,
-                this.message
-        ));
-        return handleExceptionInternal(ex, erros, headers, HttpStatus.BAD_REQUEST, request);
+        List<MessageResponse> erros = this.errosMessageResponse(MessagesEnum.ERROR_NOT_READABLE, this.cause, this.message);
+        return handleExceptionInternal(ex, erros, headers, MessagesEnum.ERROR_NOT_READABLE.getHttpSttus(), request);
     }
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        List<MessageResponse> erros = this.createListErros(HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.name(), ex.getBindingResult());
-        return handleExceptionInternal(ex, erros, headers, HttpStatus.BAD_REQUEST, request);
+        List<MessageResponse> erros = this.createListErros(MessagesEnum.ERROR_BAD_REQUEST.getHttpSttus().value(), MessagesEnum.ERROR_BAD_REQUEST.getHttpSttus().name(), ex.getBindingResult());
+        return handleExceptionInternal(ex, erros, headers, MessagesEnum.ERROR_BAD_REQUEST.getHttpSttus(), request);
     }
 
     @ExceptionHandler({BadRequestException.class})
     public ResponseEntity<Object> handleBadRequestException(RuntimeException ex, WebRequest request) {
         this.message = this.messageSource.getMessage(ex.getMessage(), null, LocaleContextHolder.getLocale());
         this.cause = ExceptionUtils.getRootCauseMessage(ex);
-        List<MessageResponse> erros = Collections.singletonList(new MessageResponse(
-                HttpStatus.BAD_REQUEST.value(),
-                HttpStatus.BAD_REQUEST.name(),
-                this.cause,
-                this.message
-        ));
-        return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+        List<MessageResponse> erros = this.errosMessageResponse(MessagesEnum.ERROR_BAD_REQUEST, this.cause, this.message);
+        return handleExceptionInternal(ex, erros, new HttpHeaders(), MessagesEnum.ERROR_BAD_REQUEST.getHttpSttus(), request);
     }
 
     @ExceptionHandler({ForbiddenException.class})
     public ResponseEntity<Object> handleForbiddenException(RuntimeException ex, WebRequest request) {
         this.message = messageSource.getMessage(ex.getMessage(), null, LocaleContextHolder.getLocale());
         this.cause = ExceptionUtils.getRootCauseMessage(ex);
-        List<MessageResponse> erros = Collections.singletonList(new MessageResponse(
-                HttpStatus.FORBIDDEN.value(),
-                HttpStatus.FORBIDDEN.name(),
-                this.cause,
-                this.message
-        ));
-        return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.FORBIDDEN, request);
+        List<MessageResponse> erros = this.errosMessageResponse(MessagesEnum.ERROR_NOT_PERMISSION, this.cause, this.message);
+        return handleExceptionInternal(ex, erros, new HttpHeaders(), MessagesEnum.ERROR_NOT_PERMISSION.getHttpSttus(), request);
     }
 
     @ExceptionHandler({FileStorageException.class})
     public ResponseEntity<Object> handleFileStorageException(RuntimeException ex, WebRequest webRequest) {
         this.message = messageSource.getMessage(ex.getMessage(), null, LocaleContextHolder.getLocale());
         this.cause = ExceptionUtils.getRootCauseMessage(ex);
-        List<MessageResponse> erros = Collections.singletonList(new MessageResponse(
-                HttpStatus.BAD_REQUEST.value(),
-                HttpStatus.BAD_REQUEST.name(),
-                this.cause,
-                this.message
-        ));
-        return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.BAD_REQUEST, webRequest);
+        List<MessageResponse> erros = this.errosMessageResponse(MessagesEnum.ERROR_FILE_STORAGE, this.cause, this.message);
+        return handleExceptionInternal(ex, erros, new HttpHeaders(), MessagesEnum.ERROR_FILE_STORAGE.getHttpSttus(), webRequest);
+    }
+
+    @ExceptionHandler({CouldNotReadException.class})
+    public ResponseEntity<Object> handleCouldNotReadException(RuntimeException ex, WebRequest webRequest) {
+        this.message = messageSource.getMessage(ex.getMessage(), null, LocaleContextHolder.getLocale());
+        this.cause = ExceptionUtils.getRootCauseMessage(ex);
+        List<MessageResponse> erros = this.errosMessageResponse(MessagesEnum.ERROR_COULD_NOT_READ, this.cause, this.message);
+        return handleExceptionInternal(ex, erros, new HttpHeaders(), MessagesEnum.ERROR_COULD_NOT_READ.getHttpSttus(), webRequest);
     }
 
     @ExceptionHandler(ResponseStatusException.class)
@@ -105,17 +93,11 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler({DataIntegrityViolationException.class})
-    public ResponseEntity<Object> handleEmptyResultDataAccessException(DataIntegrityViolationException ex,
-                                                                       WebRequest request) {
+    public ResponseEntity<Object> handleEmptyResultDataAccessException(DataIntegrityViolationException ex, WebRequest request) {
         this.message = messageSource.getMessage(MessagesEnum.ERROR_BAD_REQUEST.getMessage(), null,
                 LocaleContextHolder.getLocale());
         this.cause = ExceptionUtils.getRootCauseMessage(ex);
-        List<MessageResponse> erros = Collections.singletonList(new MessageResponse(
-                MessagesEnum.ERROR_BAD_REQUEST.getHttpCode(),
-                MessagesEnum.ERROR_BAD_REQUEST.getHttpDesctription(),
-                this.cause,
-                this.message
-        ));
+        List<MessageResponse> erros = this.errosMessageResponse(MessagesEnum.ERROR_BAD_REQUEST, this.cause, this.message);
         return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 
@@ -125,38 +107,15 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
         this.message = messageSource.getMessage(MessagesEnum.ERROR_NOT_FOUND.getMessage(), null,
                 LocaleContextHolder.getLocale());
         this.cause = ExceptionUtils.getRootCauseMessage(ex);
-        List<MessageResponse> erros = Collections.singletonList(new MessageResponse(
-                MessagesEnum.ERROR_NOT_FOUND.getHttpCode(),
-                MessagesEnum.ERROR_NOT_FOUND.getHttpDesctription(),
-                this.cause,
-                this.message
-        ));
-        return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
-    }
-
-    @ExceptionHandler({NotModifiedException.class})
-    public ResponseEntity<Object> handleNotModifiedException(RuntimeException ex, WebRequest request) {
-        this.message = messageSource.getMessage(ex.getMessage(), null, LocaleContextHolder.getLocale());
-        this.cause = ExceptionUtils.getRootCauseMessage(ex);
-        List<MessageResponse> erros = Collections.singletonList(new MessageResponse(
-                HttpStatus.NOT_MODIFIED.value(),
-                HttpStatus.NOT_MODIFIED.name(),
-                this.cause,
-                this.message
-        ));
-        return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.FORBIDDEN, request);
+        List<MessageResponse> erros = this.errosMessageResponse(MessagesEnum.ERROR_NOT_FOUND, this.cause, this.message);
+        return handleExceptionInternal(ex, erros, new HttpHeaders(), MessagesEnum.ERROR_NOT_FOUND.getHttpSttus(), request);
     }
 
     @ExceptionHandler({UserInactiveException.class})
     public ResponseEntity<Object> handleUserInactiveException(RuntimeException ex, WebRequest request) {
         this.message = messageSource.getMessage(ex.getMessage(), null, LocaleContextHolder.getLocale());
         this.cause = ExceptionUtils.getRootCauseMessage(ex);
-        List<MessageResponse> erros = Collections.singletonList(new MessageResponse(
-                HttpStatus.UNAUTHORIZED.value(),
-                HttpStatus.UNAUTHORIZED.name(),
-                this.cause,
-                this.message
-        ));
+        List<MessageResponse> erros = this.errosMessageResponse(MessagesEnum.ERROR_NOT_UNAUTHORIZED, this.cause, this.message);
         return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 
@@ -168,6 +127,14 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
             erros.add(new MessageResponse(status, error, cause, message));
         });
         return erros;
+    }
+
+    private List<MessageResponse> errosMessageResponse(MessagesEnum messagesEnum, String cause, String message) {
+        return Collections.singletonList(new MessageResponse(
+                messagesEnum,
+                cause,
+                message
+        ));
     }
 
 
