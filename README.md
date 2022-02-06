@@ -22,9 +22,11 @@ Conteúdos
 # Sobre
 <div>
 <p align="left">Este é um pequeno CRUD de filmes utilizando Spring Boot com autenticação oAuth2, JWT e Angular</p>
+    <p align="left">O cadastro e atualização de filmes está implementado com upload de arquivos, utilizando Thumbnails do pacote <b>net.coobird</b></p>    
 <p align="left">Esse projeto está em construção e periodicamente será atualizado.</p>
 <p align="left">O front-end ainda não foi iniciado. Assim que tiver início, disponibilizarei o repositório do projeto.</p>
 </div>
+
 
 </br></br></br></br>
 
@@ -82,8 +84,9 @@ Conteúdos
 
 # Instalação
 <div>
-<p align="left">Importe para o seu Mysql o arquivo <b>database.sql</b>, que se encontra em _files. Na pasta _files encontra-se também o arquivo <b>postman_collection.json</b> para que você importe para o seu postman. Esse arquivo contém os endpoints da aplicação. A API está documentada com Swagger e você pode acessar pela url /swagger-ui.html</p>
+<p align="left">Importe para o seu Mysql o arquivo <b>database.sql</b>, que se encontra em _files. Na pasta _files encontra-se também o arquivo <b>movies.postman_collection.json</b> para que você importe para o seu postman. Esse arquivo contém os endpoints da aplicação. A API está documentada com Swagger e você pode acessar pela url http://localhost:port/api/v1/swagger-ui.html</p>
 </div>
+
 
 </br></br></br></br>
 
@@ -111,7 +114,7 @@ Conteúdos
 
 
 <div id="ui"></div>
-  
+
 ## UI (front-end)
 <div>
 <p align="left"><b>Ainda não disponível</b></p>  
@@ -132,7 +135,7 @@ Conteúdos
 <img src="https://img.shields.io/static/v1?label=mysql&message=8&color=green"/>
 <img src="https://img.shields.io/static/v1?label=openapi&message=1.6.3&color=green"/>
 <img src="https://img.shields.io/static/v1?label=angular&message=10&color=green"/>
-  
+
 <img src="https://img.shields.io/static/v1?label=angular-jwt&message=4.0.3&color=green"/>
 <img src="https://img.shields.io/static/v1?label=ng2-toasty&message=4.0.3&color=green"/>
 <img src="https://img.shields.io/static/v1?label=rxjs&message=6.5.4&color=green"/>
@@ -140,6 +143,6 @@ Conteúdos
 <img src="https://img.shields.io/static/v1?label=bootstrap&message=4.5.3&color=green"/>
 
 <img src="https://img.shields.io/static/v1?label=metronic&message=7.0.8&color=green"/>
- 
+
 </div>
 
