@@ -44,4 +44,8 @@ public class MovieService extends SortService implements GenericService<Movie, I
     public void deleteById(Integer id) {
         this.repository.deleteById(id);
     }
+
+    public Optional<Movie> findByCodeImdb(String codeIndb) {
+        return this.repository.findByCodeImdb(codeIndb);
+    }
 }
