@@ -4,19 +4,21 @@ import com.fmatheus.app.controller.enumerable.MessagesEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 public class MessageResponse {
 
-    private final LocalDateTime timestamp = LocalDateTime.now();
-    private final int statusCode;
-    private final String statusDescription;
-    private final String cause;
-    private final String message;
+    private LocalDateTime timestamp = LocalDateTime.now();
+    private int statusCode;
+    private String statusDescription;
+    private String cause;
+    private String message;
 
     public MessageResponse(MessagesEnum messagesEnum, String cause, String message) {
         this.statusCode = messagesEnum.getHttpSttus().value();
