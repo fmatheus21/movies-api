@@ -31,8 +31,16 @@ server:
     encoding:
       charset: UTF-8
 
-file:
-  upload-dir: ${FILE_UPLOAD_DIR:/Projects/Movies/movies-api/upload/media}
+upload:
+  file:
+    movie:
+        dir: upload/media/movie
+        extension: .png
+        quality: 0.8
+        size:
+          height: 600
+          width: 400
+
 
 api:
   config:
