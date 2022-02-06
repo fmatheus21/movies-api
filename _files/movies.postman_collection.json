@@ -1,0 +1,243 @@
+{
+	"info": {
+		"_postman_id": "6f312be1-b104-4329-81ba-2f68aba715d1",
+		"name": "Movies",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Access Token",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "angular123456@",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "angular",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client",
+									"value": "angular",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "fmatheus",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{API_URL}}/oauth/token",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh Token",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "angular210683@",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "angular",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "refresh_token",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{API_URL}}/oauth/token",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpbWFnZSI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODA4My9hcGkvdXBsb2FkL2ltYWdlL2F2YXRhci9hdmF0YXIucG5nIiwidXNlcl9uYW1lIjoiRk1BVEhFVVMiLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXSwibmFtZSI6IkZFUk5BTkRPIEJSQUdBIE1BVEhFVVMiLCJleHAiOjE2MTA0NjQ1MjUsImF1dGhvcml0aWVzIjpbIkFETUlOIl0sImp0aSI6IjRjM2MyYjE4LTVjOGUtNDBiNy1hYTIwLWI2MzU1YjhlMDMwOCIsImNsaWVudF9pZCI6ImFuZ3VsYXIiLCJ1c2VybmFtZSI6IkZNQVRIRVVTIn0.pS3alq2XvHctokNaDrftdxj_HNha1WXmKm6LzSztdDI",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8083/api/tokens/revoke",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"api",
+								"tokens",
+								"revoke"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Movie",
+			"item": [
+				{
+					"name": "post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/home/fmatheus/Downloads/MV5BMjM5YTRlZmUtZGVmYi00ZjE2LWIyNzAtOWVhMDk1MDdkYzhjXkEyXkFqcGdeQXVyMjMxOTE0ODA@._V1_.jpg"
+								},
+								{
+									"key": "json",
+									"value": "{\n    \"codeImdb\": \"7888964\",\n    \"title\": \"Anônimo\",\n    \"year\": 2021,\n    \"rating\": 7.4,\n    \"urlTrailer\": \"https://www.youtube.com/watch?v=Fn1MT681zeE\"\n}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{API_URL}}/movies",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findAll",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_URL}}/movies",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findById",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_URL}}/movies/25",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"movies",
+								"25"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
