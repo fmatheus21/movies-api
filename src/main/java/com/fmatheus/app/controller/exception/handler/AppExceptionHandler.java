@@ -51,7 +51,7 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        List<MessageResponse> erros = this.createListErros(MessagesEnum.ERROR_BAD_REQUEST.getHttpSttus().value(), MessagesEnum.ERROR_BAD_REQUEST.getHttpSttus().name(), ex.getBindingResult());
+        List<MessageResponse> erros = this.createListErros(ex.getBindingResult());
         return handleExceptionInternal(ex, erros, headers, MessagesEnum.ERROR_BAD_REQUEST.getHttpSttus(), request);
     }
 
@@ -119,12 +119,12 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 
-    private List<MessageResponse> createListErros(int status, String error, BindingResult result) {
+    private List<MessageResponse> createListErros(BindingResult result) {
         List<MessageResponse> erros = new ArrayList<>();
         result.getFieldErrors().forEach(fieldError -> {
             this.message = this.messageSource.getMessage(fieldError, LocaleContextHolder.getLocale());
             this.cause = fieldError.toString();
-            erros.add(new MessageResponse(status, error, cause, message));
+            erros.add(new MessageResponse(MessagesEnum.ERROR_BAD_REQUEST, cause, message));
         });
         return erros;
     }

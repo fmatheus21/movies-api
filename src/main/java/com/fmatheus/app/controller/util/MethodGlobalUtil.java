@@ -47,7 +47,7 @@ public class MethodGlobalUtil {
 
     @JsonDeserialize(using = Base64Deserializer.class)
     @SneakyThrows
-    public String converterImageToBase64(String path) {
+    public static String converterImageToBase64(String path) {
         File file = new File(path);
         if (file.exists()) {
             byte[] fileContent = FileUtils.readFileToByteArray(file);

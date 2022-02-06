@@ -40,8 +40,6 @@ public class MovieResource {
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = Unauthorized.class))),
             @ApiResponse(responseCode = HttpStatusConstant.FORBIDDEN_NUMBER, description = HttpStatusConstant.FORBIDDEN,
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = Forbidden.class))),
-            @ApiResponse(responseCode = HttpStatusConstant.NOT_FOUND_NUMBER, description = HttpStatusConstant.NOT_FOUND,
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = Notfound.class))),
             @ApiResponse(responseCode = HttpStatusConstant.INTERNAL_SERVER_ERROR_NUMBER, description = HttpStatusConstant.INTERNAL_SERVER_ERROR,
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ServerError.class)))
     })
