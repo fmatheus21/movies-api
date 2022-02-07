@@ -202,6 +202,18 @@
 							],
 							"path": [
 								"movies"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "size",
+									"value": "1",
+									"disabled": true
+								}
 							]
 						}
 					},
