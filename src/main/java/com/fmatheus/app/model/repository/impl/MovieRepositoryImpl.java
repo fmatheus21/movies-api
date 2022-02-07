@@ -59,7 +59,7 @@ public class MovieRepositoryImpl extends RestrictionPageImpl<Movie> implements M
         }
 
         if (Objects.nonNull(filter.getRating())) {
-            predicates.add(builder.like(builder.lower(root.get(EntityEnum.RATING.getValue())), "%" + filter.getRating() + "%"));
+            predicates.add(builder.greaterThanOrEqualTo(root.get(EntityEnum.RATING.getValue()), filter.getRating()));
         }
 
         return predicates.toArray(new Predicate[0]);
