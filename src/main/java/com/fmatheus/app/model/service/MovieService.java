@@ -2,7 +2,10 @@ package com.fmatheus.app.model.service;
 
 import com.fmatheus.app.model.entity.Movie;
 import com.fmatheus.app.model.repository.MovieRepository;
+import com.fmatheus.app.model.repository.filter.RepositoryFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -47,5 +50,9 @@ public class MovieService extends SortService implements GenericService<Movie, I
 
     public Optional<Movie> findByCodeImdb(String codeIndb) {
         return this.repository.findByCodeImdb(codeIndb);
+    }
+
+    public Page<Movie> findAllFilter(Pageable pageable, RepositoryFilter filter) {
+        return this.repository.findAllFilter(pageable, filter);
     }
 }

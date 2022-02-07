@@ -2,15 +2,13 @@ package com.fmatheus.app.controller.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fmatheus.app.controller.dto.MovieDto;
-import com.fmatheus.app.controller.hateoas.link.MovieLink;
+import com.fmatheus.app.controller.hateoas.model.MovieRepresentationModel;
 import com.fmatheus.app.controller.storage.FilesStorageService;
 import com.fmatheus.app.controller.util.MethodGlobalUtil;
 import com.fmatheus.app.model.entity.Movie;
 import lombok.*;
+import org.springframework.data.domain.Page;
 import org.springframework.hateoas.RepresentationModel;
-
-import java.util.Collection;
-import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -28,12 +26,12 @@ public class MovieResponse extends RepresentationModel<MovieResponse> {
                 .build());
     }
 
-    public static Collection<MovieResponse> converterListForResponse(Collection<Movie> collection, MethodGlobalUtil methodGlobalUtil, FilesStorageService filesStorageService) {
-        return collection.stream().map(map -> converterForResponse(map, methodGlobalUtil, filesStorageService)).collect(Collectors.toUnmodifiableList());
+    public static Page<MovieResponse> converterListForResponse(Page<Movie> movies, MethodGlobalUtil methodGlobalUtil, FilesStorageService filesStorageService) {
+        return movies.map(map -> MovieResponse.converterForResponse(map, methodGlobalUtil, filesStorageService));
     }
 
     private static MovieResponse hateoas(MovieResponse dto) {
-        return new MovieLink().hateoas(dto, dto.getMovie().getId());
+        return new MovieRepresentationModel().hateoas(dto, dto.getMovie().getId());
     }
 
 
