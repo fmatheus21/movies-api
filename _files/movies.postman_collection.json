@@ -196,12 +196,42 @@
 							}
 						],
 						"url": {
-							"raw": "{{API_URL}}/movies",
+							"raw": "{{API_URL}}/movies?page=0&size=20",
 							"host": [
 								"{{API_URL}}"
 							],
 							"path": [
 								"movies"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "20"
+								},
+								{
+									"key": "title",
+									"value": "trado",
+									"disabled": true
+								},
+								{
+									"key": "year",
+									"value": "2017",
+									"disabled": true
+								},
+								{
+									"key": "rating",
+									"value": "7.3",
+									"disabled": true
+								},
+								{
+									"key": "codeImdb",
+									"value": "964",
+									"disabled": true
+								}
 							]
 						}
 					},

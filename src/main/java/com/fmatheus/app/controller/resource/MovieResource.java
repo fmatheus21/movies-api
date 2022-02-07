@@ -7,12 +7,15 @@ import com.fmatheus.app.controller.dto.response.MovieResponse;
 import com.fmatheus.app.controller.dto.swagger.*;
 import com.fmatheus.app.controller.exception.handler.response.MessageResponse;
 import com.fmatheus.app.controller.rule.MovieRule;
+import com.fmatheus.app.model.repository.filter.RepositoryFilter;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -20,7 +23,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
-import java.util.Collection;
 
 @RestController
 @RequestMapping(ResourceConstant.MOVIES)
@@ -44,8 +46,8 @@ public class MovieResource {
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ServerError.class)))
     })
     @GetMapping
-    public ResponseEntity<Collection<MovieResponse>> findAll() {
-        return rule.findAll();
+    public ResponseEntity<Page<MovieResponse>> findAll(Pageable pageable, RepositoryFilter filter) {
+        return rule.findAll(pageable, filter);
     }
 
     @Operation(summary = OperationConstant.GET, description = OperationConstant.DESCRIPTION_GET,

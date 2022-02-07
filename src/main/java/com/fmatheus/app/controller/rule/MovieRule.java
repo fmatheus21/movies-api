@@ -2,24 +2,25 @@ package com.fmatheus.app.controller.rule;
 
 import com.fmatheus.app.controller.dto.request.MovieRequest;
 import com.fmatheus.app.controller.dto.response.MovieResponse;
-import com.fmatheus.app.controller.enumerable.EntityEnum;
 import com.fmatheus.app.controller.enumerable.MessagesEnum;
 import com.fmatheus.app.controller.enumerable.UploadTypeEnum;
 import com.fmatheus.app.controller.exception.handler.response.MessageResponse;
 import com.fmatheus.app.controller.storage.FilesStorageService;
 import com.fmatheus.app.controller.util.AuthUtil;
 import com.fmatheus.app.controller.util.MethodGlobalUtil;
+import com.fmatheus.app.model.repository.filter.RepositoryFilter;
 import com.fmatheus.app.model.service.MovieService;
 import lombok.SneakyThrows;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Collection;
 import java.util.Objects;
 
 @Component
@@ -41,10 +42,11 @@ public class MovieRule {
     private MethodGlobalUtil methodGlobalUtil;
 
 
-    public ResponseEntity<Collection<MovieResponse>> findAll() {
-        var movies = this.movieService.findAllSortAsc(EntityEnum.TITLE.getValue());
+  public ResponseEntity<Page<MovieResponse>> findAll(Pageable pageable, RepositoryFilter filter) {
+        var movies = this.movieService.findAllFilter(pageable, filter);
         return Objects.nonNull(movies) ? ResponseEntity.ok(MovieResponse.converterListForResponse(movies, methodGlobalUtil, filesStorageService)) : ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
+
 
     public ResponseEntity<MovieResponse> findById(int id) {
         var movie = this.movieService.findById(id).orElseThrow(

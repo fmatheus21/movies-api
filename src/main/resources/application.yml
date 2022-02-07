@@ -1,4 +1,14 @@
 spring:
+  data:
+    web:
+      sort:
+        sort-parameter: sort #Nome do parametro de classificacao
+      pageable:
+        size-parameter: size #Nome do parametro de tamanho de pagina
+        page-parameter: page #Nome do parametro de índice de pagina
+        one-indexed-parameters: false #Assumir o numero 1 como indice inicial
+        max-page-size: 100 #Tamanho maximo de pagina a ser aceito
+        default-page-size: 20 #Tamanho de pagina padrao
   servlet:
     multipart:
       max-request-size: 5MB # File Storage Properties
@@ -40,7 +50,6 @@ upload:
         size:
           height: 600
           width: 400
-
 
 api:
   config:
