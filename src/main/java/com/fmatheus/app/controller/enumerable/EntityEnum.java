@@ -4,7 +4,10 @@ import lombok.Getter;
 
 public enum EntityEnum {
 
-    TITLE("title");
+    CODE_IMDB("codeImdb"),
+    TITLE("title"),
+    YEAR("year"),
+    RATING("rating");
 
     @Getter
     private final String value;
