@@ -14,8 +14,7 @@ public enum HateoasEnum {
     DELETE("Delete"),
     DELETE_TYPE("DELETE"),
     UPDATE("Update"),
-    UPDATE_TYPE("PUT"),
-    RECORD(" Record");
+    UPDATE_TYPE("PUT");
 
     @Getter
     private final String value;
