@@ -45,7 +45,7 @@ public final class AuthUtil {
         logger.warn("Verificando se o usuario tem permissao para esta acao.");
 
         var user = this.userService.findById(id).orElseThrow(
-                () -> this.messageResponseRule.badRequestErrorUserNotfound()
+                this.messageResponseRule::badRequestErrorUserNotfound
         );
 
         if (!user.getUsername().equals(auth.getPrincipal())) {
@@ -62,7 +62,7 @@ public final class AuthUtil {
 
     public User findByUsername(Authentication auth) {
         return this.userService.findByUsername(auth.getPrincipal().toString()).orElseThrow(
-                () -> this.messageResponseRule.badRequestErrorUserNotfound()
+                this.messageResponseRule::badRequestErrorUserNotfound
         );
     }
 

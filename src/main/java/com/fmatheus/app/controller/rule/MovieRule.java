@@ -27,6 +27,12 @@ import java.util.Objects;
 public class MovieRule {
 
     @Autowired
+    private MethodGlobalUtil methodGlobalUtil;
+
+    @Autowired
+    private FilesStorageService filesStorageService;
+
+    @Autowired
     private AuthUtil authUtil;
 
     @Autowired
@@ -36,23 +42,20 @@ public class MovieRule {
     private MovieService movieService;
 
     @Autowired
-    private FilesStorageService filesStorageService;
-
-    @Autowired
-    private MethodGlobalUtil methodGlobalUtil;
+    private MovieResponse movieResponse;
 
 
-  public ResponseEntity<Page<MovieResponse>> findAll(Pageable pageable, RepositoryFilter filter) {
+    public ResponseEntity<Page<MovieResponse>> findAll(Pageable pageable, RepositoryFilter filter) {
         var movies = this.movieService.findAllFilter(pageable, filter);
-        return Objects.nonNull(movies) ? ResponseEntity.ok(MovieResponse.converterListForResponse(movies, methodGlobalUtil, filesStorageService)) : ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        return Objects.nonNull(movies) ? ResponseEntity.ok(this.movieResponse.converterListForResponse(movies)) : ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
 
     public ResponseEntity<MovieResponse> findById(int id) {
         var movie = this.movieService.findById(id).orElseThrow(
-                () -> this.messageResponseRule.errorNotFound()
+                this.messageResponseRule::errorNotFound
         );
-        return ResponseEntity.status(HttpStatus.OK).body(MovieResponse.converterForResponse(movie, methodGlobalUtil, filesStorageService));
+        return ResponseEntity.status(HttpStatus.OK).body(this.movieResponse.converterForResponse(movie));
     }
 
 

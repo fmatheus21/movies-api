@@ -35,7 +35,7 @@ public class AppUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         logger.info("Username: {}", username);
-        var user = this.userService.findByUsername(AppUtil.removeAllSpaces(username)).orElseThrow(() -> this.messageResponseRule.usernameNotFoundException());
+        var user = this.userService.findByUsername(AppUtil.removeAllSpaces(username)).orElseThrow(this.messageResponseRule::usernameNotFoundException);
 
         if (user.getUserStatus().getId() != 1) {
             logger.error("Usuario inativo: {}", username);
