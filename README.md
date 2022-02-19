@@ -116,8 +116,11 @@ Conteúdos
 <div id="ui"></div>
 
 ## UI (front-end)
-<div>
-<p align="left"><b>Ainda não disponível</b></p>  
+
+[Repositório do front-end](https://github.com/fmatheus21/movies-ui) 
+<div>   
+<p align="left">  
+  </p>  
 <div>
 
 </div>
