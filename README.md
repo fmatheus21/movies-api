@@ -5,16 +5,16 @@
 Conteúdos
 =================
 <!--ts-->
-* [Sobre](#sobre)
-* [Features](#features)
-* [Pré-requisitos](#pre-requisitos)
-* [Instalação](#instalacao)
-     * [API](#instalacao-api)
-     * [UI](#instalacao-ui)
-* [Como usar](#como-usar)
-     * [API](#como-usar-api)
-     * [UI](#como-usar-ui)
-* [Tecnologias](#tecnologias)
+   * [Sobre](#sobre)
+   * [Features](#features)
+   * [Pré-requisitos](#pre-requisitos)
+   * [Instalação](#instalacao)
+        * [API](#instalacao-api)  
+        * [UI](#instalacao-ui) 
+   * [Como usar](#como-usar)  
+       * [API](#como-usar-api)     
+       * [UI](#como-usar-ui) 
+   * [Tecnologias](#tecnologias)  
 <!--te-->
 
 </br></br></br></br>
@@ -65,10 +65,10 @@ Conteúdos
 > - Angular CLI 12.2.16
 
 
-</br></br></br></br>
+  </br></br></br></br>
 
-# Instalação <a id="instalacao"></a>
-## API (back-end) <a id="instalacao-api"></a>
+# Instalação <a id="instalacao"></a> 
+## API (back-end) <a id="instalacao-api"></a> 
 > Importe para o seu Mysql o arquivo  <code>***database.sql***</code>, que se encontra em <code>***_files***</code>. Na pasta <code>***_files***</code> encontra-se também o arquivo  <code>***movies.postman_collection.json***</code> para que você importe para o seu postman. Esse arquivo contém os endpoints da aplicação. A API está documentada com Swagger e você pode acessar pela url  <code>***localhost:port/api/v1/swagger-ui.html***</code>. No rquivo <code>***application.properties***</code>  contém as configurações da API, uma das mais importantes é <code>***api.config.allow-origin***</code> , nela você vai informar onde a aplicação Angular está rodando. Só serão aceitas requisições desta origem.
 
 ><code>***[Repositório API](https://github.com/fmatheus21/movies-api)***</code>
@@ -81,17 +81,17 @@ Conteúdos
 
 ><code>***[Repositório UI](https://github.com/fmatheus21/movies-ui)***</code>
 
-</br></br></br></br>
+  </br></br></br></br>
 
 # Como Usar <a id="como-usar"></a>
 
 ## API (back-end)<a id="como-usar-api"></a>
-> Primeiramente, edite o arquivo <code>***application.properties***</code>  e altere as seguintes informações:
+> Primeiramente, edite o arquivo <code>***application.properties***</code>  e altere as seguintes informações:  
 > - spring.datasource.url=<code><***sua url do banco***></code>.
 > - spring.datasource.username=<code><***seu usuário do banco***></code>.
 > - spring.datasource.password=<code><***sua senhado banco***></code>.
 > - server.port=<code><***port***></code> - Caso queira rodar em outra porta.
-> - api.config.allow-origin=<code><***origem permitida***></code>. Url onde está rodando a aplicação Angular.
+> - api.config.allow-origin=<code><***origem permitida***></code>. Url onde está rodando a aplicação Angular. 
 > - server.port=<code><***port***></code> - Caso queira rodar em outra porta.
 
 > Abra o projeto no Intellij (ou na sua IDE preferia), e execute-o utilizando o Maven.  
@@ -101,7 +101,7 @@ Conteúdos
 
 ><code>***[Repositório API](https://github.com/fmatheus21/movies-api)***</code>
 
-</br></br>
+  </br></br>
 
 ## UI (front-end) <a id="como-usar-ui"></a>
 
