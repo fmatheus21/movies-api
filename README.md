@@ -8,144 +8,126 @@ Conteúdos
    * [Sobre](#sobre)
    * [Features](#features)
    * [Pré-requisitos](#pre-requisitos)
-   * [Instalação](#instalacao)     
+   * [Instalação](#instalacao)
+        * [API](#instalacao-api)  
+        * [UI](#instalacao-ui) 
    * [Como usar](#como-usar)  
-       * [API](#api)     
-       * [UI](#ui) 
+       * [API](#como-usar-api)     
+       * [UI](#como-usar-ui) 
    * [Tecnologias](#tecnologias)  
 <!--te-->
 
 </br></br></br></br>
 
-<div id="sobre"></div>
 
-# Sobre
-<div>
-<p align="left">Este é um pequeno CRUD de filmes utilizando Spring Boot com autenticação oAuth2, JWT e Angular</p>
-    <p align="left">O cadastro e atualização de filmes está implementado com upload de arquivos, utilizando Thumbnails do pacote <b>net.coobird</b></p>    
-<p align="left">Esse projeto está em construção e periodicamente será atualizado.</p>
-<p align="left">O front-end ainda não foi iniciado. Assim que tiver início, disponibilizarei o repositório do projeto.</p>
-</div>
+# Sobre <a id="sobre"></a>
+<p align="left">Este é um pequeno CRUD de filmes utilizando Spring Boot com autenticação oAuth2, JWT e Angular 12</p>
+ <p align="left">A implementação conta com upload de arquivos, login expirado por inatividade, envio de email, cors e muito mais.</p>
+ <p align="left">Esse projeto está em construção e periodicamente será atualizado.</p> 
 
 
 </br></br></br></br>
 
-<h4 align="center"> 
-🚧  Em construção...  🚧
-</h4>
+>## <center>  🚧 Em construção...🚧  </center>
 
 </br></br></br></br>
 
-
-<div id="features"></div>
-
-# Features
+# Features<a id="features"></a>
 
 ## Back-end
-- [x] Access Token
-- [x] Refresh Token
-- [x] Logout
-- [x] Cadastrar Filme
-- [x] Consultar Filme
-- [ ] Atualizar Filme
-- [x] Listar Filme
-- [ ] Excluir Filme
+>- [x] Access Token
+>- [x] Refresh Token
+>- [x] Logout
+>- [x] Cadastrar Filme
+>- [x] Consultar Filme
+>- [ ] Atualizar Filme
+>- [x] Listar Filme
+>- [ ] Excluir Filme
 
 ## Front-end
-- [ ] Login
-- [ ] Logout
-- [ ] Cadastrar Filme
-- [ ] Consultar Filme
-- [ ] Atualizar Filme
-- [ ] Listar Filme
-- [ ] Excluir Filme
+>- [ ] Login
+>- [ ] Logout
+>- [ ] Cadastrar Filme
+>- [ ] Consultar Filme
+>- [ ] Atualizar Filme
+>- [ ] Listar Filme
+>- [ ] Excluir Filme
 
 </br></br></br></br>
 
 
-<div id="pre-requisitos"></div>
+# Pré-requisitos <a id="pre-requisitos"></a>
+> - Mysql 8
+> - JDK 11+
+> - Postman v9.13.2
+> - Node 4.15.0
+> - NPM 6.14.8
+> - Angular CLI 12.2.16
 
-# Pré-requisitos
-<p align="left">
-  <ul>
-    <li>Mysql 8</li>
-    <li>JDK 11+</li>
-    <li>Postman 7.36.1</li>
-    <li>Node 4.15.1</li>
-    <li>NPM 6.14.8</li>
-    <li>Angular CLI 9.0.7</li>
-    </ul>
-  </p>
 
+  </br></br></br></br>
+
+# Instalação <a id="instalacao"></a> 
+## API (back-end) <a id="instalacao-api"></a> 
+> Importe para o seu Mysql o arquivo  <code>***database.sql***</code>, que se encontra em <code>***_files***</code>. Na pasta <code>***_files***</code> encontra-se também o arquivo  <code>***movies.postman_collection.json***</code> para que você importe para o seu postman. Esse arquivo contém os endpoints da aplicação. A API está documentada com Swagger e você pode acessar pela url  <code>***localhost:port/api/v1/swagger-ui.html***</code>. No rquivo <code>***application.properties***</code>  contém as configurações da API, uma das mais importantes é <code>***api.config.allow-origin***</code> , nela você vai informar onde a aplicação Angular está rodando. Só serão aceitas requisições desta origem.
+
+><code>***[Repositório API](https://github.com/fmatheus21/movies-api)***</code>
+
+<br />
+
+## UI (front-end) <a id="instalacao-ui"></a>
+
+> Abra o projeto no  <code>***VSCode***</code>  ou a IDE de sua preferência, abra o terminal e digite  <code>***npm install***</code>. Isso irá baixar todas as dependências necessária para rodar o projeto. Após baixar as dependências, digite  <code>***npm start***</code> para iniciar o projeto.  No arquivo  <code>***environment.ts***</code> existem duas configurações  <code>***(apiUrl e startWatching)***</code>, a <code>***apiUrl***</code> aponta para a url que está rodando a <code>***[API](https://github.com/fmatheus21/movies-api)***</code>  e a <code>***startWatching***</code> é o tempo em segundos que a aplicação irá expirar caso fique inativo. Configure o tempo que achar necessário para aplicação inativa expirar.
+
+><code>***[Repositório UI](https://github.com/fmatheus21/movies-ui)***</code>
+
+  </br></br></br></br>
+
+# Como Usar <a id="como-usar"></a>
+
+## API (back-end)<a id="como-usar-api"></a>
+> Primeiramente, edite o arquivo <code>***application.properties***</code>  e altere as seguintes informações:  
+> - spring.datasource.url=<code><***sua url do banco***></code>.
+> - spring.datasource.username=<code><***seu usuário do banco***></code>.
+> - spring.datasource.password=<code><***sua senhado banco***></code>.
+> - server.port=<code><***port***></code> - Caso queira rodar em outra porta.
+> - api.config.allow-origin=<code><***origem permitida***></code>. Url onde está rodando a aplicação Angular. 
+> - server.port=<code><***port***></code> - Caso queira rodar em outra porta.
+
+> Abra o projeto no Intellij (ou na sua IDE preferia), e execute-o utilizando o Maven.  
+> Para testar os endpoints no  <code>***Postman***</code>, abra-o  e importe o arquivo  <code>***movies.postman_collection.json***</code> que se encontra em <code>***_files_***</code>.
+> Gere o  <code>***Access Token***</code> e coleque-o no Bearer. Após, é só testar os endpoints.  
+> A API está documentada com o <code>***Swagger***</code>, é só entrar no seu navegador e digitar  <code>***localhost:port/api/v1/swagger-ui.html***</code> e você verá todos os endpoints da API.
+
+><code>***[Repositório API](https://github.com/fmatheus21/movies-api)***</code>
+
+  </br></br>
+
+## UI (front-end) <a id="como-usar-ui"></a>
+
+> Abra o projeto no  <code>***VSCode***</code>  ou na IDE de sua preferência, abra o terminal e digite  <code>***npm start***</code>. Por padrão, a aplicação irá rodar  na porta 4200  <code>***(http://localhost:4200/)***</code>.
+
+> ***Atenção:*** Se você alterar a porta padrão, será necessário alterar  a configuração na API informando a Origem Permitida no arquivo application.properties <code>***api.config.allow-origin=http://localhost:port/***</code>
+
+><code>***[Repositório UI](https://github.com/fmatheus21/movies-ui)***</code>
 
 </br></br></br></br>
 
-<div id="instalacao"></div>
+# Tecnologias  <a id="tecnologias"></a>
 
-# Instalação
-<div>
-<p align="left">Importe para o seu Mysql o arquivo <b>database.sql</b>, que se encontra em _files. Na pasta _files encontra-se também o arquivo <b>movies.postman_collection.json</b> para que você importe para o seu postman. Esse arquivo contém os endpoints da aplicação. A API está documentada com Swagger e você pode acessar pela url http://localhost:port/api/v1/swagger-ui.html</p>
-</div>
-
-
-</br></br></br></br>
-
-<div id="como-usar"></div>
-
-# Como Usar
-
-<div id="api"></div>
-
-## API (back-end)
-<div>
-<p align="left">Primeiramente, edite o arquivo <b>/api/src/main/resources/application.yml</b> e altere as seguintes informações:</p>  
-  <ul>
-  <li><b>server.port=</b>PORT - Porta do Mysql</li>
-  <li><b>spring.datasource.username=</b>USER_NAME - Usuário do Mysql</li>
-  <li><b>spring.datasource.password=</b>PASSWORD - Senha do Mysql</li>
-  <li><b>api.allow.origin=</b>http://localhost:4200 - Essa é a url padrão que roda a apicação Angular. Se você rodar o front-end em outra porta, essa linha também deverá ser alterada.</li>
-  <li><b>api.domain=</b>http://localhost:8083 - Se a porta da API for alterada, altere também esta linha</li>
-  </ul>  
- </br>
- <p align="left">Abra o projeto na sua IDE (originalmente desenvolvida no Intellij) e execute. Abra o Postman e importe o arquivo <b>postman_collection.json</b> e faça os testes.</p>  
-</div>
-
-</br>
+![Java](https://img.shields.io/static/v1?label=Java&message=11&color=green)
+![Spring Boot](https://img.shields.io/static/v1?label=spring-boot&message=2.5.8&color=green)
+![oAuth](https://img.shields.io/static/v1?label=oauth&message=2.2.6&color=green)
+![JWT](https://img.shields.io/static/v1?label=jwt&message=1.1.0&color=green)
+![MySql](https://img.shields.io/static/v1?label=mysql&message=8&color=green)
+![OpenAPI](https://img.shields.io/static/v1?label=openapi&message=1.6.3&color=green)
+![Angular CLI](https://img.shields.io/static/v1?label=angular&message=12.2.16&color=green)
+![Angular JWT](https://img.shields.io/static/v1?label=angular-jwt&message=4.0.3&color=green)
+![Toasty](https://img.shields.io/static/v1?label=ng2-toasty&message=4.0.3&color=green)
+![Node](https://img.shields.io/static/v1?label=node&message=14.15.0&color=green)
+![NPM](https://img.shields.io/static/v1?label=npm&message=6.14.8&color=green)
 
 
-<div id="ui"></div>
 
-## UI (front-end)
 
-[Repositório do front-end](https://github.com/fmatheus21/movies-ui) 
-<div>   
-<p align="left">  
-  </p>  
-<div>
-
-</div>
-
-</br></br>
-
-<div id="tecnologias"><div>
-
-# Tecnologias 
-<div>
-<img src="https://img.shields.io/static/v1?label=Java&message=12&color=green"/>
-<img src="https://img.shields.io/static/v1?label=spring-boot&message=2.5.8&color=green"/>
-<img src="https://img.shields.io/static/v1?label=oauth&message=2.2.6&color=green"/>
-<img src="https://img.shields.io/static/v1?label=jwt&message=1.1.0&color=green"/>
-<img src="https://img.shields.io/static/v1?label=mysql&message=8&color=green"/>
-<img src="https://img.shields.io/static/v1?label=openapi&message=1.6.3&color=green"/>
-<img src="https://img.shields.io/static/v1?label=angular&message=10&color=green"/>
-
-<img src="https://img.shields.io/static/v1?label=angular-jwt&message=4.0.3&color=green"/>
-<img src="https://img.shields.io/static/v1?label=ng2-toasty&message=4.0.3&color=green"/>
-<img src="https://img.shields.io/static/v1?label=rxjs&message=6.5.4&color=green"/>
-<img src="https://img.shields.io/static/v1?label=rxjs-compat&message=6.6.3&color=green"/>
-<img src="https://img.shields.io/static/v1?label=bootstrap&message=4.5.3&color=green"/>
-
-<img src="https://img.shields.io/static/v1?label=metronic&message=7.0.8&color=green"/>
-
-</div>
 
