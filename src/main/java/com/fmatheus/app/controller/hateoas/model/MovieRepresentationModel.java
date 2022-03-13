@@ -1,6 +1,6 @@
 package com.fmatheus.app.controller.hateoas.model;
 
-import com.fmatheus.app.controller.dto.response.MovieResponse;
+import com.fmatheus.app.controller.dto.response.MovieDtoResponse;
 import com.fmatheus.app.controller.enumerable.HateoasEnum;
 import com.fmatheus.app.controller.resource.MovieResource;
 import org.springframework.hateoas.Link;
@@ -9,9 +9,9 @@ import org.springframework.hateoas.RepresentationModel;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
-public class MovieRepresentationModel extends RepresentationModel<MovieResponse> {
+public class MovieRepresentationModel extends RepresentationModel<MovieDtoResponse> {
 
-    public MovieResponse hateoas(MovieResponse movie, int id) {
+    public MovieDtoResponse hateoas(MovieDtoResponse movie, int id) {
         return movie.add(this.linkView(id));
     }
 

@@ -27,6 +27,7 @@ public class MovieConverter {
                 .title(AppUtil.convertFirstUppercaseCharacter(movie.getTitle()))
                 .year(movie.getYear())
                 .rating(movie.getRating())
+                .colorRating(this.defineColor(movie))
                 .urlTrailer(movie.getUrlTrailer())
                 .image(MethodGlobalUtil.converterImageToBase64(loadIcon(movie, methodGlobalUtil, filesStorageService)))
                 .createdBy(AppUtil.convertFirstUppercaseCharacter(movie.getCreatedBy().getPerson().getName()))
@@ -34,6 +35,11 @@ public class MovieConverter {
                 .updatedBy(AppUtil.convertFirstUppercaseCharacter(AppUtil.convertFirstUppercaseCharacter(movie.getUpdatedBy().getPerson().getName())))
                 .updatedAt(movie.getUpdatedAt())
                 .build();
+    }
+
+    private String defineColor(Movie movie) {
+        var rating = movie.getRating().doubleValue();
+        return rating > 0 && rating < 5 ? "#e22121" : "#42b74";
     }
 
     public Page<MovieDto> converterToListDto(Page<Movie> movies) {

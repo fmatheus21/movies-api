@@ -29,6 +29,7 @@ public class MovieDto {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = FormatTypeConstant.DATE_TIME)
     private LocalDateTime updatedAt;
     private String image;
+    private String colorRating;
 
 
 }

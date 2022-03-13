@@ -8,7 +8,6 @@ public class ValuePropertiesConstant {
     }
 
     public static final String ALLOW_ORIGIN = "${api.config.allow-origin}";
-    public static final String DOMAIN = "${api.config.domain}";
     public static final String WITH_CLIENT = "${api.config.with-client}";
     public static final String SECRET_CLIENT = "${api.config.secret-client}";
     public static final String JWT_SIGNING_KEY = "${api.config.jwt-signing-key}";
