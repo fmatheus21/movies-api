@@ -7,7 +7,6 @@ import com.fmatheus.app.model.entity.User;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
-import org.codehaus.jackson.map.ObjectMapper;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -15,7 +14,7 @@ import java.math.BigDecimal;
 
 @Getter
 @Setter
-public class MovieRequest {
+public class MovieDtoRequest {
 
     @NotNull
     private String codeImdb;
@@ -35,7 +34,7 @@ public class MovieRequest {
     private String urlTrailer;
 
     @SneakyThrows
-    public static Movie converterEntity(MovieRequest request, String image, User user) {
+    public static Movie converterEntity(MovieDtoRequest request, String image, User user) {
         return Movie.builder()
                 .codeImdb(request.getCodeImdb())
                 .title(AppUtil.convertFirstUppercaseCharacter(request.getTitle()))

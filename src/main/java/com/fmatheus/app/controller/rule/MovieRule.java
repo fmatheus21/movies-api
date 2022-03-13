@@ -1,7 +1,7 @@
 package com.fmatheus.app.controller.rule;
 
-import com.fmatheus.app.controller.dto.request.MovieRequest;
-import com.fmatheus.app.controller.dto.response.MovieResponse;
+import com.fmatheus.app.controller.dto.request.MovieDtoRequest;
+import com.fmatheus.app.controller.dto.response.MovieDtoResponse;
 import com.fmatheus.app.controller.enumerable.MessagesEnum;
 import com.fmatheus.app.controller.enumerable.UploadTypeEnum;
 import com.fmatheus.app.controller.exception.handler.response.MessageResponse;
@@ -42,16 +42,16 @@ public class MovieRule {
     private MovieService movieService;
 
     @Autowired
-    private MovieResponse movieResponse;
+    private MovieDtoResponse movieResponse;
 
 
-    public ResponseEntity<Page<MovieResponse>> findAll(Pageable pageable, RepositoryFilter filter) {
+    public ResponseEntity<Page<MovieDtoResponse>> findAll(Pageable pageable, RepositoryFilter filter) {
         var movies = this.movieService.findAllFilter(pageable, filter);
         return Objects.nonNull(movies) ? ResponseEntity.ok(this.movieResponse.converterListForResponse(movies)) : ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
 
-    public ResponseEntity<MovieResponse> findById(int id) {
+    public ResponseEntity<MovieDtoResponse> findById(int id) {
         var movie = this.movieService.findById(id).orElseThrow(
                 this.messageResponseRule::errorNotFound
         );
@@ -63,7 +63,7 @@ public class MovieRule {
     public ResponseEntity<MessageResponse> create(Authentication auth, String json, MultipartFile file) {
 
         var objectMapper = new ObjectMapper();
-        var movieRequest = objectMapper.readValue(json, MovieRequest.class);
+        var movieRequest = objectMapper.readValue(json, MovieDtoRequest.class);
 
         var movie = this.movieService.findByCodeImdb(movieRequest.getCodeImdb()).orElse(null);
 
@@ -78,7 +78,7 @@ public class MovieRule {
         }
 
         var image = this.saveFile(file);
-        var request = MovieRequest.converterEntity(movieRequest, image, user);
+        var request = MovieDtoRequest.converterEntity(movieRequest, image, user);
         this.movieService.save(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(this.messageResponseRule.messageSuccessCreate());
 

@@ -3,7 +3,7 @@ package com.fmatheus.app.controller.resource;
 import com.fmatheus.app.controller.constant.HttpStatusConstant;
 import com.fmatheus.app.controller.constant.OperationConstant;
 import com.fmatheus.app.controller.constant.ResourceConstant;
-import com.fmatheus.app.controller.dto.response.MovieResponse;
+import com.fmatheus.app.controller.dto.response.MovieDtoResponse;
 import com.fmatheus.app.controller.dto.swagger.*;
 import com.fmatheus.app.controller.exception.handler.response.MessageResponse;
 import com.fmatheus.app.controller.rule.MovieRule;
@@ -35,7 +35,7 @@ public class MovieResource {
             tags = {OperationConstant.TAG_MOVIE})
     @ApiResponses(value = {
             @ApiResponse(responseCode = HttpStatusConstant.OK_NUMBER, description = HttpStatusConstant.OK,
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = MovieResponse.class))),
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = MovieDtoResponse.class))),
             @ApiResponse(responseCode = HttpStatusConstant.NO_CONTENT_NUMBER, description = HttpStatusConstant.NO_CONTENT,
                     content = @Content(schema = @Schema(hidden = true))),
             @ApiResponse(responseCode = HttpStatusConstant.UNAUTHORIZED_NUMBER, description = HttpStatusConstant.UNAUTHORIZED,
@@ -46,7 +46,7 @@ public class MovieResource {
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ServerError.class)))
     })
     @GetMapping
-    public ResponseEntity<Page<MovieResponse>> findAll(Pageable pageable, RepositoryFilter filter) {
+    public ResponseEntity<Page<MovieDtoResponse>> findAll(Pageable pageable, RepositoryFilter filter) {
         return rule.findAll(pageable, filter);
     }
 
@@ -54,7 +54,7 @@ public class MovieResource {
             tags = {OperationConstant.TAG_MOVIE})
     @ApiResponses(value = {
             @ApiResponse(responseCode = HttpStatusConstant.OK_NUMBER, description = HttpStatusConstant.OK,
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = MovieResponse.class))),
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = MovieDtoResponse.class))),
             @ApiResponse(responseCode = HttpStatusConstant.BAD_REQUEST_NUMBER, description = HttpStatusConstant.BAD_REQUEST,
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = BadRequest.class))),
             @ApiResponse(responseCode = HttpStatusConstant.UNAUTHORIZED_NUMBER, description = HttpStatusConstant.UNAUTHORIZED,
@@ -65,7 +65,7 @@ public class MovieResource {
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ServerError.class)))
     })
     @GetMapping(ResourceConstant.ID)
-    public ResponseEntity<MovieResponse> findById(@PathVariable int id) {
+    public ResponseEntity<MovieDtoResponse> findById(@PathVariable int id) {
         return rule.findById(id);
     }
 

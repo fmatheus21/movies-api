@@ -22,24 +22,24 @@ import org.springframework.stereotype.Component;
 @Builder
 @JsonIgnoreProperties({"converter"})
 @JsonPropertyOrder({"_links", "movie"})
-public class MovieResponse extends RepresentationModel<MovieResponse> {
+public class MovieDtoResponse extends RepresentationModel<MovieDtoResponse> {
 
     private MovieDto movie;
 
     @Autowired
     private MovieConverter converter;
 
-    public MovieResponse converterForResponse(Movie movie) {
-        return this.hateoas(MovieResponse.builder()
+    public MovieDtoResponse converterForResponse(Movie movie) {
+        return this.hateoas(MovieDtoResponse.builder()
                 .movie(this.converter.converterToDto(movie))
                 .build());
     }
 
-    private MovieResponse hateoas(MovieResponse dto) {
+    private MovieDtoResponse hateoas(MovieDtoResponse dto) {
         return new MovieRepresentationModel().hateoas(dto, dto.getMovie().getId());
     }
 
-    public Page<MovieResponse> converterListForResponse(Page<Movie> movies) {
+    public Page<MovieDtoResponse> converterListForResponse(Page<Movie> movies) {
         return movies.map(this::converterForResponse);
     }
 

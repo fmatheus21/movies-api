@@ -54,7 +54,7 @@ public class ResourceServeConfig extends ResourceServerConfigurerAdapter {
                 .and()
                 .authorizeRequests()
 
-                .antMatchers(HttpMethod.GET, ResourceConstant.MOVIES).hasAnyAuthority(RoleConstant.LIST_MOVIES)
+                .antMatchers(HttpMethod.GET, ResourceConstant.MOVIES).permitAll()
                 .antMatchers(HttpMethod.GET, ResourceConstant.MOVIES + ResourceConstant.ID_RESOURCE).hasAnyAuthority(RoleConstant.VIEW_MOVIES)
                 .antMatchers(HttpMethod.POST, ResourceConstant.MOVIES).hasAnyAuthority(RoleConstant.CREATE_MOVIES)
                 .antMatchers(HttpMethod.PUT, ResourceConstant.MOVIES + ResourceConstant.ID_RESOURCE).hasAnyAuthority(RoleConstant.UPDATE_MOVIES)
