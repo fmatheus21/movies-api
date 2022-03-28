@@ -137,7 +137,7 @@ Conteúdos
 <div>
 <p align="center">
 <a target="_blank" rel="noopener noreferrer" href="https://github.com/fmatheus21/movies-api/blob/main/_files/demonstracao.gif">
-<img src="https://github.com/fmatheus21/movies-api/blob/main/_files/demonstracao.gif" alt="Logo" style="max-width:100%;" ></a>
+<img src="https://github.com/fmatheus21/movies-api/blob/main/_files/demonstracao.gif" alt="Logo" style="width:100%; max-width:100%;" ></a>
 </p>
 </div>
 </pre>
