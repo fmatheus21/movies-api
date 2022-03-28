@@ -50,7 +50,7 @@ Conteúdos
 >- [ ] Cadastrar Filme
 >- [ ] Consultar Filme
 >- [ ] Atualizar Filme
->- [ ] Listar Filme
+>- [x] Listar Filme
 >- [ ] Excluir Filme
 
 </br></br></br></br>
